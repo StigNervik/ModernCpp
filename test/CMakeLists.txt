@@ -8,9 +8,15 @@ find_package(Catch2 REQUIRED)
 
 file(GLOB SOURCES "*.cpp")
 
+include_directories("include")
+include_directories("../src")
+
+add_library (my_library STATIC
+             "../src/unit.cpp"
+             "../src/lambda.cpp")
 
 add_executable(tests ${SOURCES})
-target_link_libraries(tests Catch2::Catch2)
+target_link_libraries(tests Catch2::Catch2 my_library)
 
 include(CTest)
 include(ParseAndAddCatchTests)
